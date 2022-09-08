@@ -21,7 +21,8 @@ class Calculator {
     }
 
     clearAll() {
-        this.currOperator = ''
+        // without this, it'll display NaN instead of 0 when cleared
+        this.currOperator = '0'
         this.prevOperator = ''
         this.operation = undefined
     }
@@ -42,12 +43,12 @@ class Calculator {
     getDisplayNum(num){
         const stringNum = num.toString()
         const integers = parseFloat(stringNum.split('.')[0])
-        const decimals = stringNum.split('.')[0]
+        const decimals = stringNum.split('.')[1]
         let display 
         if(isNaN(integers)){
             display = ''
         }else{
-            display = integers.toLocaleString('en',{ maximumFractionDigits: 0}) 
+            display = integers.toString()
         }
         if(decimals != null){
             return `${integers}.${decimals}`
@@ -61,7 +62,7 @@ class Calculator {
         const previous = parseFloat(this.prevOperator)
         const current = parseFloat(this.currOperator)
         if(isNaN(previous) || isNaN(current)){
-            return
+            return 
         }
         switch (this.operation){
             // these can be done more simply but this is cool 
