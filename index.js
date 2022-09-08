@@ -1,5 +1,4 @@
 // DISPLAY
-const display = document.getElementById('display')
 const currNum = document.querySelector('[data-curr-num]')
 const prevNum = document.querySelector('[data-prev-num]')
 // OPERATOR BUTTONS
@@ -20,74 +19,94 @@ class Calculator {
         this.currNum = currNum
         this.clearAll()
     }
-}
-const calculator = new Calculator(prevNum, currNum)
 
-function clearAll() {
-    this.currOperator = ''
-    this.prevOperator = ''
-    this.operation = undefined
-}
-
-
-function backspace() {
-    this.currOperator = this.currOperator.toString().slice(0, -1) 
-}
-
-function updateDisplay(){
-    if(this.operation != null){
-        this.prevNum.innerText = `${this.getDisplayNum(this.prevOperator)} ${this.operation}`
+    clearAll() {
+        this.currOperator = ''
+        this.prevOperator = ''
+        this.operation = undefined
     }
-}
 
-function evaluate(){
-    let result
-    const previous = parseFloat(this.prevOperator)
-    const current = parseFloat(this.currOperator)
-    if(isNaN(previous) || isNaN(current)){
-        return
+    backspace() {
+        this.currOperator = this.currOperator.toString().slice(0, -1) 
     }
-    switch (this.operation){
-        // these can be done more simply but this is cool 
-        case '+':
-            result = add(previous,current)
-            break
-        case '-':
-            result = subtract(previous,current)
-            break
-        case 'x':
-            result = multiply(previous,current)
-            break
-        case '÷':
-            result = divide(previous,current)
-            break
-        default: 
+
+    updateDisplay(){
+        this.currNum.innerText = this.getDisplayNum(this.currOperator)
+        if(this.operation != null){
+            this.prevNum.innerText = `${this.getDisplayNum(this.prevOperator)} ${this.operation}`
+        }else{
+            this.prevNum.innerText = ''
+        }
+    }
+
+    getDisplayNum(num){
+        const stringNum = num.toString()
+        const integers = parseFloat(stringNum.split('.')[0])
+        const decimals = stringNum.split('.')[0]
+        let display 
+        if(isNaN(integers)){
+            display = ''
+        }else{
+            display = integers.toLocaleString('en',{ maximumFractionDigits: 0}) 
+        }
+        if(decimals != null){
+            return `${integers}.${decimals}`
+        }else{
+            return integers
+        }
+    }
+
+    evaluate(){
+        let result
+        const previous = parseFloat(this.prevOperator)
+        const current = parseFloat(this.currOperator)
+        if(isNaN(previous) || isNaN(current)){
             return
+        }
+        switch (this.operation){
+            // these can be done more simply but this is cool 
+            case '+':
+                result = add(previous,current)
+                break
+            case '-':
+                result = subtract(previous,current)
+                break
+            case 'x':
+                result = multiply(previous,current)
+                break
+            case '÷':
+                result = divide(previous,current)
+                break
+            default: 
+                return
+        }
+        this.currOperator = result
+        this.operation = undefined
+        this.prevOperator = ''
     }
-    this.currOperator = result
-    this.operation = undefined
-    this.prevOperator = ''
+
+    appendNumber(num) {
+        // prevents duplicate periods/decimal points
+        if(num === '.' && this.currOperator.includes('.')){
+            return
+        }
+        this.currOperator = this.currOperator.toString() + num.toString()
+    }
+
+    chooseOperation(operation){
+        if(this.currOperator === ''){
+            return
+        }
+        if(this.prevOperator !== ''){
+            this.evaluate()
+        }
+        this.operation = operation
+        this.prevOperator = this.currOperator
+        this.currOperator = ''
+    }
 }
 
-function appendNumber(num) {
-    // prevents duplicate periods/decimal points
-    if(num === '.' && this.currOperator.includes('.')){
-        return
-    }
-    this.currOperator = this.currOperator.toString() + num.toString()
-}
-
-function chooseOperation(operation){
-    if(this.currOperator === ''){
-        return
-    }
-    if(this.prevOperator === ''){
-        this.evaluate()
-    }
-    this.operation = operation
-    this.prevOperator = this.currOperator
-    this.currOperator = ''
-}
+const calculator = new Calculator(prevNum, currNum)
 
 numButtons.forEach(button => {
     button.addEventListener('click', () => {
