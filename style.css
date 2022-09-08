@@ -8,6 +8,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Norse;
+    
 }
 header{
     border: 3px solid rgb(216, 191, 0);
@@ -25,7 +26,15 @@ body {
     padding: 0;
     margin: 0;
     background-color: lightgray;
+    background-image: url('https://images6.alphacoders.com/113/thumbbig-1136820.webp');
+    background-size: cover;
 }
+
+h1 > a {
+    color: gold;
+    text-decoration: none;
+}
+
 #calculator{
     display: grid;
     justify-content: center;
@@ -38,7 +47,7 @@ body {
 #calculator > button {
     background-color: #704F32;
     cursor: url('https://e1.pngegg.com/pngimages/589/154/png-clipart-tp-master-sword-cursors-blue-handled-sword-thumbnail.png'), pointer;
-    font-size: 2rem;
+    font-size: 3rem;
     border: 1px, solid #FFFFFF;
     outline: none;
 }
@@ -103,6 +112,6 @@ footer {
 .social-links{
     height: 30px;
 }
-a{
+footer > a{
     text-decoration: none;
 }
