@@ -11,38 +11,37 @@
 <body>
     <main>
         <header>
-            <h1>Need a caulculator? Borrow Odin's:</h1>
+            <h1>Need a caulculator?</h1>
+            <h1>Borrow 
+                <a href="https://en.wikipedia.org/wiki/Valheim"
+                target="_blank" rel="noopener noreferrer"
+                >Odin's:
+                </a>
+            </h1>
         </header>
         <div id="calculator">
-            <div id="calc-top">
-                <div id="display">
-                    <h3>1337 *placeholder*</h3>
-                </div>
-                <div id="clear-button">
-                    <button>Clear</button>
-                </div>
+            <div id="display">
+                <div data-prev-num id="prev-num"></div>
+                <div data-curr-num id="curr-num"></div>
             </div>
-            <div id="calc-middle">
-                <div id="numbers">
-                    <button id="zero">0</button>
-                    <button id="one">1</button>
-                    <button id="two">2</button>
-                    <button id="three">3</button>
-                    <button id="four">4</button>
-                    <button id="five">5</button>
-                    <button id="six">6</button>
-                    <button id="seven">7</button>
-                    <button id="eight">8</button>
-                    <button id="nine">9</button>
-                </div>
-                <div id="operators">
-                    <button id="equals">=</button>
-                    <button id="plus">+</button>
-                    <button id="minus">-</button>
-                    <button id="times">x</button>
-                    <button id="by">÷</button>
-                </div>
-            </div>
+            <button data-clear id="clear-button">Clear</button>
+            <button data-backspace>⬅</button>
+            <button data-operator>+</button>
+            <button data-num>1</button>
+            <button data-num>2</button>
+            <button data-num>3</button>
+            <button data-operator>-</button>
+            <button data-num>4</button>
+            <button data-num>5</button>
+            <button data-num>6</button>
+            <button data-operator>x</button>
+            <button data-num>7</button>
+            <button data-num>8</button>
+            <button data-num>9</button>
+            <button data-operator>÷</button>
+            <button data-num>.</button>
+            <button data-num>0</button>
+            <button data-equals id="equals-button">=</button>
         </div>
     </main>
     <footer>
